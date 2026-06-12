@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love! ✨</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #DDD3C9; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333; 
+            transition: background-color 0.8s ease; 
+        }
+
+        .yildiz {
+            position: absolute;
+            background-color: #ff79c6;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: parildama 2s infinite ease-in-out;
+        }
+
+        @keyframes parildama {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.4); }
+        }
+
+        .oyun-kutusu {
+            background: rgba(255, 255, 255, 0.85); 
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        h1 { color: #364023; font-size: 30px; margin-bottom: 20px; }
+        p { color: #444; font-size: 20px; line-height: 1.6; margin-bottom: 30px; }
+
+        .buton-konteyner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #575527 0%, #364023 100%);
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #B97D7B 0%, #928E5E 100%);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .tek-btn { grid-column: span 2; max-width: 250px; margin: 0 auto; }
+        .lyrics { font-style: italic; font-size: 26px; color: #B97D7B; font-weight: 600; }
+
+        .buyuyen-resim {
+            max-width: 200px;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px auto;
+            display: block;
+            animation: buyumeEfekti 2.5s forwards cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes buyumeEfekti {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .suzen-medya {
+            max-width: 160px;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px auto;
+            display: block;
+            animation: suzulme 4s infinite ease-in-out;
+        }
+
+        @keyframes suzulme {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(5deg); }
+        }
+
+        .cift-medya-kutusu {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .yan-suzen-medya {
+            max-width: 130px;
+            height: auto;
+            border-radius: 12px;
+            animation: yanSuzulme 3.5s infinite ease-in-out;
+        }
+
+        .yan-suzen-medya:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes yanSuzulme {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.03); }
+        }
+
+        .kucuk-orta-medya {
+            max-width: 240px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="yildiz-alani"></div>
+
+    <audio id="music1" src="media/about_u_by_lil_peep.mp3" preload="auto" crossorigin="anonymous"></audio>
+    <audio id="music2" src="media/my_love_mine_all_mine_by_mitski.mp3" preload="auto" crossorigin="anonymous"></audio>
+
+    <div class="oyun-kutusu" id="oyun">
+        <h1>I HAVE A SURPRISE FOR YOU... 🎁</h1>
+        <p>I prepared a small interactive birthday gift for you. Turn up the volume and lean back, babe.</p>
+        <div class="buton-konteyner">
+            <button class="btn tek-btn" onclick="akisiBaslat()">Start ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        const g = {
+            golempoppy: "media/golempoppy.png",
+            poppy: "media/poppy.png",
+            cd: "media/cd.png",
+            hibpurple: "media/hibpurple.png",
+            hiborange: "media/hiborange.png",
+            hibcd: "media/hibcd.webp",
+            mc: "media/mc.jpeg"
+        };
+
+        const renkler = [
+            "#DDD3C9", "#ECC4C3", "#C7A39B", "#B97D7B", "#E6B1C4", "#928E5E", "#575527", "#364023", "#DDD3C9", "#ECC4C3", "#C7A39B"
+        ];
+
+        function renkDegistir(indeks) {
+            document.body.style.backgroundColor = renkler[indeks];
+            const baslik = document.querySelector(".oyun-kutusu h1");
+            if (indeks === 6 || indeks === 7) {
+                document.body.style.color = "#fff";
+                if(baslik) baslik.style.color = "#E6B1C4";
+            } else {
+                document.body.style.color = "#333";
+                if(baslik) baslik.style.color = "#364023";
+            }
+        }
+
+        const yildizAlani = document.getElementById('yildiz-alani');
+        for (let i = 0; i < 40; i++) {
+            let yildiz = document.createElement('div');
+            yildiz.classList.add('yildiz');
+            let boyut = Math.random() * 4 + 2;
+            yildiz.style.width = boyut + 'px'; yildiz.style.height = boyut + 'px';
+            yildiz.style.left = Math.random() * 100 + 'vw'; yildiz.style.top = Math.random() * 100 + 'vh';
+            yildiz.style.animationDelay = Math.random() * 2 + 's';
+            yildizAlani.appendChild(yildiz);
+        }
+
+        let adim = 0;
+        const m1 = document.getElementById('music1');
+        const m2 = document.getElementById('music2');
+        let m1Interval, m2Interval;
+
+        function akisiBaslat() {
+            renkDegistir(1);
+
+            m1.currentTime = 40;
+            m1.play().catch(err => {
+                console.log("Müzik çalma hatası, kullanıcı etkileşimi bekleniyor.", err);
+            });
+
+            m1Interval = setInterval(() => {
+                if (m1.currentTime >= 100) {
+                    m1.pause();
+                    clearInterval(m1Interval);
+                }
+            }, 500);
+
+            ilkSarkiSozleri();
+        }
+
+        function ilkSarkiSozleri() {
+            const oyun = document.getElementById('oyun');
+            oyun.innerHTML = `<p class="lyrics">[ Buraya 1. şarkı sözü satırını ekle ]</p>`;
+            
+            setTimeout(() => {
+                oyun.innerHTML = `<p class="lyrics">[ Buraya 2. şarkı sözü satırını ekle ]</p>`;
+            }, 3500);
+
+            setTimeout(() => {
+                oyun.innerHTML = `<p class="lyrics">[ Buraya 3. şarkı sözü satırını ekle ]</p>`;
+            }, 7000);
+
+            setTimeout(() => {
+                golemPoppyEkrani();
+            }, 10000);
+        }
+
+        function golemPoppyEkrani() {
+            const oyun = document.getElementById('oyun');
+            oyun.innerHTML = `
+                <h1>Look At This! 🥺</h1>
+                <img class="buyuyen-resim" src="${g.golempoppy}" alt="Golem Poppy">
+                <p>Something special is waking up...</p>
+            `;
+
+            setTimeout(() => {
+                oyun.innerHTML = `
+                    <h1>It's Growing! 🌱</h1>
+                    <img class="buyuyen-resim" src="${g.poppy}" alt="Poppy">
+                    <div class="buton-konteyner" style="margin-top: 20px;">
+                        <button class="btn tek-btn" onclick="ilerle()">Go to Question 1 ❤️</button>
+                    </div>
+                `;
+            }, 3500);
+        }
+
+        function ilerle() {
+            adim++;
+            const oyun = document.getElementById('oyun');
+            renkDegistir(adim + 1);
+
+            if (adim === 1) {
+                oyun.innerHTML = `
+                    <h1>Question 1</h1>
+                    <p>How was the weather on the very first day we met?</p>
+                    <div class="buton-konteyner">
+                        <button class="btn" onclick="ilerle()">A) Super Rainy</button>
+                        <button class="btn" onclick="ilerle()">B) Bright & Sunny</button>
+                        <button class="btn" onclick="ilerle()">C) Honestly, I forgot</button>
+                        <button class="btn" onclick="ilerle()">D) We were literally freezing</button>
+                    </div>`;
+            } 
+            else if (adim === 2) {
+                oyun.innerHTML = `
+                    <h1>Question 2</h1>
+                    <p>What is that one annoying thing you always do but I secretly love?</p>
+                    <div class="buton-konteyner">
+                        <button class="btn" onclick="ilerle()">A) Being late to dates</button>
+                        <button class="btn" onclick="ilerle()">B) Staring at your phone</button>
+                        <button class="btn" onclick="ilerle()">C) Always being right</button>
+                        <button class="btn" onclick="ilerle()">D) All of the above</button>
+                    </div>`;
+            } 
+            else if (adim === 3) {
+                oyun.innerHTML = `
+                    <h1>A Little Note For You 💌</h1>
+                    <img class="suzen-medya" src="${g.cd}" alt="CD Media">
+                    <p>"I don't care if you got those right or wrong, every single second with you is the best time of my life."</p>
+                    <div class="buton-konteyner"><button class="btn tek-btn" onclick="ilerle()">Keep Going ✨</button></div>`;
+            } 
+            else if (adim === 4) {
+                oyun.innerHTML = `
+                    <h1>Question 3</h1>
+                    <p>If we could spend an entire day in just one city, where would we go?</p>
+                    <div class="buton-konteyner">
+                        <button class="btn" onclick="ilerle()">A) Amsterdam</button>
+                        <button class="btn" onclick="ilerle()">B) Tokyo</button>
+                        <button class="btn" onclick="ilerle()">C) By the coast</button>
+                        <button class="btn" onclick="ilerle()">D) Rome</button>
+                    </div>`;
+            } 
+            else if (adim === 5) {
+                oyun.innerHTML = `
+                    <h1>Did you know? 👀</h1>
+                    <div class="cift-medya-kutusu">
+                        <img class="yan-suzen-medya" src="${g.hibpurple}" alt="Hibpurple">
+                        <img class="yan-suzen-medya" src="${g.hiborange}" alt="Hiborange">
+                    </div>
+                    <p>"Every time I look at you, I still get the exact same butterflies from day one. I'm so lucky to have you."</p>
+                    <div class="buton-konteyner"><button class="btn tek-btn" onclick="ilerle()">Next</button></div>`;
+            } 
+            else if (adim === 6) {
+                oyun.innerHTML = `
+                    <h1>One more thing... 🤫</h1>
+                    <img class="suzen-medya" src="${g.hibcd}" alt="Hibcd">
+                    <p>"Once you finish this little game, you'll be one step closer to your actual birthday gift."</p>
+                    <div class="buton-konteyner"><button class="btn tek-btn" onclick="ilerle()">Let's hit the final question!</button></div>`;
+            } 
+            else if (adim === 7) {
+                oyun.innerHTML = `
+                    <h1>Question 4 (Final)</h1>
+                    <p>How much do you actually love me?</p>
+                    <div class="buton-konteyner">
+                        <button class="btn" onclick="ilerle()">A) To the moon and back</button>
+                        <button class="btn" onclick="ilerle()">B) Beyond any limits</button>
+                        <button class="btn" onclick="ilerle()">C) Words can't even describe</button>
+                        <button class="btn" onclick="ilerle()">D) All of them and way more</button>
+                    </div>`;
+            } 
+            else if (adim === 8) {
+                oyun.innerHTML = `
+                    <h1>You Did Great! 🎉</h1>
+                    <img class="kucuk-orta-medya" src="${g.mc}" alt="MC Media">
+                    <p>"You completed all the questions. Now lean back, the vibe and the music are about to change."</p>
+                    <div class="buton-konteyner"><button class="btn tek-btn" onclick="sonSarkiVeMesaj()">Bring the Outro 💫</button></div>`;
+            }
+        }
+
+        function sonSarkiVeMesaj() {
+            m1.pause(); 
+            clearInterval(m1Interval);
+
+            renkDegistir(9);
+
+            m2.currentTime = 25;
+            m2.play().catch(err => console.log("Audio 2 error:", err));
+
+            m2Interval = setInterval(() => {
+                if (m2.currentTime >= 65) {
+                    m2.pause();
+                    clearInterval(m2Interval);
+                }
+            }, 500);
+            
+            const oyun = document.getElementById('oyun');
+            oyun.innerHTML = `
+                <h1>Happy Birthday, My Love! 🎂❤️</h1>
+                <p class="lyrics">[ Buraya 4. şarkı sözü satırını ekle ]</p>
+            `;
+
+            setTimeout(() => {
+                oyun.innerHTML = `
+                    <h1>Happy Birthday, My Love! 🎂❤️</h1>
+                    <p class="lyrics">[ Buraya 5. şarkı sözü satırını ekle ]</p>
+                `;
+            }, 5000);
+
+            setTimeout(() => {
+                renkDegistir(10);
+                oyun.innerHTML = `
+                    <h1>🎉 GAME OVER 🎉</h1>
+                    <p>Now come over and give me a huge hug to claim your real gift! 🎁</p>
+                `;
+            }, 11000);
+        }
+    </script>
+</body>
+</html>
